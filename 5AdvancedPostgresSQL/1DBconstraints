@@ -1,0 +1,71 @@
+Constraints are rules defined as part of the data model to control what values are allowed in specific columns and tables.
+Data types (witten after column and data type):
+NOT NULL constraints
+UNIQUE constraints
+PRIMARY KEY constraints
+CHECK constraints
+FOREIGN KEY Constraints
+
+type casting-PostgreSQL will try to interpret incoming data as the data type the column has been defined as.
+
+NOT NULL constraints example
+CREATE TABLE talks (
+    id integer,
+    title varchar NOT NULL,
+    speaker_id integer NOT NULL,
+    estimated_length integer,
+    session_timeslot timestamp NOT NULL
+);
+
+ALTER CLAUSE example: (modifies existing constraint on existing talk table)
+ALTER TABLE talks
+ALTER COLUMN title SET NOT NULL;
+
+NB-Backfilling is a term occasionally used in DB engineering to refer to the process of adding or updating past values.
+
+A CHECK constraint can be written into a CREATE TABLE statement, or added to an existing table with ALTER TABLE.
+eg1) for existing table:
+ALTER TABLE talks 
+ADD CHECK (estimated_length > 0);
+eg2)
+CREATE TABLE talks
+estimated_length integer NOT NULL CHECK (estimated_length > 0);
+eg3)Selecting multiple columns
+ALTER TABLE talks
+ADD CHECK (estimated_length < 120 AND date_part('year', session_timeslot) = 2020);
+
+
+UNIQUE - to identify values in a single/group of column as unique
+eg1)
+ALTER TABLE talks
+ADD UNIQUE (speaker_id, session_timeslot)
+eg2)
+CREATE TABLE registrations (
+    attendee_id integer NOT NULL,
+    session_timeslot timestamp NOT NULL,
+    talk_id  integer NOT NULL,
+    UNIQUE (session_timeslot, attendee_id)
+);
+
+
+A primary key is a column (or set of columns) that uniquely identifies a row within a database table
+similar to simultaneously enforcing a UNIQUE and NOT NULL constraints on a column
+
+eg1)
+ALTER TABLE attendees
+ADD PRIMARY KEY (id); 
+
+referential integrity- Refers to the property that ensures data can be validated by referencing another table in the data model 
+FOREIGN KEY constraints — Allow you to maintain referential integrity between two tables by validating the entry in one also appears in the other.
+eg1) speakers is parent table. talks is child table
+ALTER TABLE talks
+ADD FOREIGN KEY (speaker_id)
+REFERENCES speakers (id);
+
+By default, a foreign key constraint will prevent an engineer from deleting or updating a row of a parent table that is referenced by some child table. 
+
+CASCADE clauses (ON UPDATE CASCADE, ON DELETE CASCADE) cause the updates or deletes to automatically be applied to any child tables.
+
+ALTER TABLE registrations
+ADD FOREIGN KEY (talk_id)
+REFERENCES talks (id) ON DELETE CASCADE

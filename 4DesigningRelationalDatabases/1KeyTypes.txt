@@ -1,0 +1,31 @@
+CREATE TABLE recipe (
+  id integer PRIMARY KEY,
+  name varchar(20),
+  ...
+);
+
+Querying the Information schema to validate primary keys
+SELECT
+  constraint_name, table_name, column_name
+FROM
+  information_schema.key_column_usage
+WHERE
+  table_name = 'recipe';
+
+To designate multiple columns as a composite primary key, use this syntax:
+  PRIMARY KEY (column_one, column_two)
+
+To designate a foreign key on a single column in PostgreSQL,
+ we use the REFERENCES keyword:
+ CREATE TABLE person (
+  id integer PRIMARY KEY,
+  name varchar(20),
+  age integer
+);
+ 
+CREATE TABLE email (
+  email varchar(20) PRIMARY KEY,
+  person_id integer REFERENCES person(id),
+  storage integer,
+  price money
+);

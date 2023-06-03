@@ -1,0 +1,8 @@
+Transaction are operations/ groups of operations performed on a database
+All transactions in databse must maintain their ACID properties.
+Those being Atomicity, Consistency, Isolation, and Durability.
+Atomic/ity- Each transaction is treated as a single operation
+Consistency- Each transaction must follow rules of database
+Isolation- Transaction can run concurrently as long as they 
+don't ineract with each other
+Durability- after a transaction successfully completes, changes to data persist and are not undone, even in the event of a system failure. (Use of a change log)

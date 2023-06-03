@@ -1,0 +1,57 @@
+ccuser has all priveleges
+To check the name of the current user:
+SELECT current_user 
+
+
+A listing of all users in the database 
+and a description of what special permissions these users have:
+pg_catalog.pg_roles
+(rolname column gives all users)
+
+description of the permissions a user (grantee) has on a table.
+information_schema.table_privileges
+(columns include: grantor, grantee, table_schema, table_name, privilege_type)
+
+SET ROLE <test role> used to mimic differents users of different priveleges.
+
+eg:
+CREATE ROLE username WITH permission i.e.NOSUPERUSER LOGIN;
+eg2:
+ALTER ROLE miriam WITH CREATEDB
+
+
+Using GRANT statments to define user permissions:
+(Without USAGE a role cannot access tables within that schema.)
+GRANT USAGE, CREATE ON SCHEMA finance TO analyst;
+GRANT SELECT, UPDATE ON finance.revenue TO analyst;
+
+REVOKE UPDATE ON finance.revenue FROM analyst;
+
+Default permissions only apply to objects created after the defaults are set:
+(This will apply to all object created after default set)
+ALTER DEFAULT PRIVILEGES IN SCHEMA finance
+GRANT SELECT ON TABLES TO analyst;
+
+Creating new group role syntax:
+eg1)
+CREATE ROLE marketing WITH NOLOGIN ROLE alice, bob;
+
+eg2)
+CREATE ROLE finance WITH NOLOGIN;
+GRANT finance TO charlie;
+
+eg3)
+CREATE ROLE fran WITH LOGIN IN ROLE employees, managers; 
+
+
+Can restrict access to specific columns in table to users:
+GRANT SELECT (project_code, project_name, project_status) 
+ON projects to employees;
+
+
+Adding row-level security:
+CREATE POLICY emp_rls_policy ON accounts FOR SELECT 
+TO sales USING (salesperson=current_user);
+(policy name, table name, role name, condition)
+ALTER TABLE accounts ENABLE ROW LEVEL SECURITY;
+(Initiating row level security)

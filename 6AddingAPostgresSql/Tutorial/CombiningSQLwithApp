@@ -1,0 +1,3 @@
+There are three common approaches to developing the interface between the core 
+application and the data layer: raw SQL, query builders, and ORMs (object-relational 
+mappers).

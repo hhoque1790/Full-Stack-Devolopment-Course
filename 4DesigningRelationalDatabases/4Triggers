@@ -1,0 +1,53 @@
+1)Definw function using following syntax:
+CREATE OR REPLACE FUNCTION insert_function() RETURNS TRIGGER AS $$
+    BEGIN
+        NEW.last_name := 'UNKNOWN';
+        RETURN NEW;
+    END;
+$$ LANGUAGE PLPGSQL;
+
+2)Set the function as target of trigger:
+CREATE TRIGGER insert_trigger
+  BEFORE INSERT ON customers
+  FOR EACH ROW
+  EXECUTE PROCEDURE insert_function();
+
+3)Subsequent insert statements will always be modified so that the added
+last name parameter is always unknown.
+INSERT INTO customers (first_name, last_name)
+VALUES ('John', 'Doe');
+
+Syntax for using WHEN in clauses:
+CREATE TRIGGER update_trigger_high
+  BEFORE UPDATE ON clients
+  FOR EACH ROW
+  WHEN (NEW.total_spent >= 1000)
+  EXECUTE PROCEDURE set_high_spender();
+
+
+FN-
+BEFORE — this calls your trigger before the query that fired the trigger
+AFTER- occurs once the query finishes its work.
+FOR EACH ROW - the trigger will fire and call the function for every row 
+that is impacted by the related query.
+FOR EACH STATEMENT calls the function in the trigger once for each query,
+ not for each record.
+
+ one SQL command can trigger more than one kind of trigger.
+ Eg1)
+ For example, an 
+ INSERT can fire a trigger that calls a function that updates another record(s), 
+ firing an UPDATE trigger.
+ Eg2)
+ Say you have a DELETE trigger on your customers table. The function associated 
+ with this trigger inserts a record into the customers_deleted table. Additionally, 
+ the customers_deleted table has an INSERT trigger on it. So when this record is 
+ inserted it calls its associated function for the trigger that updates a record in 
+ the security table setting the date for next review due to the current date.
+
+
+Selecting and dropping Triggers
+
+SELECT * FROM information_schema.triggers;
+DROP TRIGGER im_a_bad_trigger ON orders;
+SELECT * FROM information_schema.triggers;

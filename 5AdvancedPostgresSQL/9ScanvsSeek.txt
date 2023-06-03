@@ -1,0 +1,5 @@
+A scan search in a database is where every record in the table/view is searched to 
+find the records requested by the query.
+A seek search in a database is where the server jumps to specific records using an index. If more information is needed, it then looks back at the pointer to the main dataset to retrieve the corresponding information.
+A database server will try to use a seek search when it can, but it needs an index to work from that matches the search criteria and the number of anticipated records is a small enough subset of the total records in 
+the table/view.

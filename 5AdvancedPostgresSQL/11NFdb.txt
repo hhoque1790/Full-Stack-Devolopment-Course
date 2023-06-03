@@ -1,0 +1,4 @@
+For a 1NF normalised database each row must be unique and each cell cotain one piece 
+of info
+A 2NF database needs to be both 1NF and contain no partial dependencies.
+A 3NF database is  a NF databse with no trnsitive functional dependencies.

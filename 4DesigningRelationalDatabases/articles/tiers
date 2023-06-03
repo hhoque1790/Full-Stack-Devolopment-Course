@@ -1,0 +1,7 @@
+Tiers refer to teh different processes/parts that make up a program
+
+Three tier app. is a framewprk that consists of presentation tier, 
+application tier, and data tier.
+Presentation tier is UI
+Application tier connects data tier to presentation tier and manipulate any 
+data gathered.
