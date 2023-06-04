@@ -1,0 +1,89 @@
+<!--Semantic HTML refers to the use of HTML elements which provide contextual meaning
+to the information they display/contain.This is for:
+- better accessibility for screen readers.
+-SEO- proces of increasing website traffic. A better SEO means search engines are better 
+able to identify website content.
+- makes source code easier to understand for other web developers.-->
+<!DOCTYPE html>
+<html>
+  <body>
+    <header>
+      <h1>Navigational Links</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#posts">Posts</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <!--nav tags contain a list of navigational links such as menus/table of 
+        content-->
+    </header>
+    <!--Header element usually contains introductory content or navigational links-->
+    <main>
+        <section>
+            <article>
+                <h2>Facts About Dogs</h2>
+                <p>ogs have a sense of time. It's been proven that they know the 
+                    difference between a hour and five. If conditioned to, they can 
+                    predict future events, such as regular walk times.
+                </p>
+            </article>
+            <!--Articles that contain information that can be understood without the 
+            need of any other contextual information on the websote.(i.e. blogs,
+            articles, magazines,comments etc.)-->
+            <aside>
+                <p>A study was conducted on dogs being away from their owners for 
+                    varying hours and the studies show that dogs who were away from 
+                    their owners the longest showed the greatest amount of affection!
+                </p> 
+            </aside>
+            <!--The <aside> element is used to mark additional information that can 
+                enhance another element but isn’t required in order to understand the
+                 main content.E.g. include Bibliographies,Endnotes,Comments,Pull 
+                Quotes, Editorial Sidebars and Additional Information.-->
+        </section>
+        <!--section tag contains elements of a document with the same theme.(i.e.
+            articles about cricket)-->
+    
+        <figure>
+            <img src="https://content.codecademy.com/courses/SemanticHTML/dogimage.jpeg"/>
+            <figcaption>A cute dog.</figcaption>
+            <!--<figcaption> is an element used to describe the media in the 
+                <figure> tag.-->
+        </figure>
+        <!--figure element is is an element used to encapsulate media such as an image, 
+        illustration, diagram, code snippet, etc, which is referenced in the main flow
+         of the document.--> 
+        <audio controls>
+            <source src="https://content.codecademy.com/courses/SemanticHTML/dogBarking.mp3" type="audio/mp3">
+        </audio> 
+        <!--The <audio> element is used to embed audio content into a document.src & type
+            attribute must be specified. control and autoplay are optional attributes.-->
+        <video src="https://content.codecademy.com/courses/SemanticHTML/dog-video.mp4" controls>
+        </video>
+        <!--Video tag is used to embed videos. src attribute must be specified. Optional 
+            attributes include controls, autoplay and loop.-->
+    </main>
+    <!--main element contains the main/dominant content of the webpage.-->
+    
+    <footer>
+        <p>Contact me at +1 234 567 8910 </p>
+    </footer>
+    <!--Footer contains information such as contact information, copyright information,
+    terms of use, site map and reference top of page links. Usually located at the
+bottom of the webpage.-->
+  </body>
+</html>
+<!--Overall:
+-<header>, <nav> , <main> and <footer> create the basic structure of the 
+    webpage.
+-<section> defines elements in a document, such as chapters, headings, or any other 
+    area of the document with the same theme.
+-<article> holds content that makes sense on its own such as articles, blogs, comments, 
+    etc.
+-<aside> contains information that is related to the main content, but not required 
+    in order to understand the dominant information.
+-<figure> encapsulates all types of media.
+-<figcaption> is used to describe the media in <figure>.
+-<video>, <embed>, and <audio> elements are used for media files.-->
